@@ -7,7 +7,6 @@ import (
 	"io"
 	"io/ioutil"
 	"os"
-	"strings"
 )
 
 type NmapRun struct {
@@ -94,16 +93,11 @@ func main() {
 		}
 
 		for _, port := range host.Ports.Port {
-			if port.State.State == "open" {
-				protocol := "http"
-				if port.Service.Name == "https" || strings.Contains(port.Service.Name, "ssl") || port.PortID == 443 {
-					protocol = "https"
-				}
-
+			if port.State.State == "open" && (port.Service.Name == "http" || port.Service.Name == "https") {
+				protocol := port.Service.Name
 				url := fmt.Sprintf("%s://%s:%d", protocol, ip, port.PortID)
 				fmt.Println(url)
 			}
 		}
 	}
 }
-
