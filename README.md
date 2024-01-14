@@ -35,10 +35,4 @@ https://192.168.1.13:443
 
 ## Build:
 
-You must already have go installed, then:
-
-```
-git clone https://github.com/sdcampbell/nmapurls.git
-cd nmapurls
-go build nmapurls.go
-```
+You must already have go installed, then run `go install github.com/sdcampbell/nmapurls@latest`
