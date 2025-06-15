@@ -37,4 +37,4 @@ https://192.168.1.13:443
 
 ## Build:
 
-You must already have go installed, then run `go install github.com/sdcampbell/nmapurls@latest`
+You must already have go installed, then run `go install github.com/sdcampbell/nmapurls@latest`.
