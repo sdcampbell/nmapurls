@@ -5,6 +5,7 @@ Edit: The output now prints hostnames when available. Otherwise it prints an IP 
 
 ## Usage:
 
+### Basic usage:
 ```
 cat nmap.xml | ./nmapurls
 http://192.168.1.1:80
@@ -21,7 +22,7 @@ https://192.168.1.13:443
 ```
 
 ```
-./nmap -f nmap.xml
+./nmapurls -f nmap.xml
 http://192.168.1.1:80
 https://192.168.1.1:443
 http://192.168.1.4:80
@@ -34,6 +35,29 @@ https://192.168.1.7:443
 http://192.168.1.13:80
 https://192.168.1.13:443
 ```
+
+### Extract only HTTPS services:
+```
+./nmapurls -f nmap.xml --https-only
+https://192.168.1.1:443
+https://192.168.1.4:443
+https://192.168.1.6:443
+https://192.168.1.7:443
+https://192.168.1.13:443
+```
+
+```
+./nmapurls -f nmap.xml -s
+https://192.168.1.1:443
+https://192.168.1.4:443
+https://192.168.1.6:443
+https://192.168.1.7:443
+https://192.168.1.13:443
+```
+
+## Options:
+- `-f, --file`: Nmap XML report file path
+- `-s, --https-only`: Extract only HTTPS services
 
 ## Build:
 

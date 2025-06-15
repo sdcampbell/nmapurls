@@ -66,6 +66,8 @@ func parseNmapXML(reader io.Reader) (*NmapRun, error) {
 func main() {
     fileFlag := flag.String("file", "", "Nmap XML report file path")
     flag.StringVar(fileFlag, "f", "", "Nmap XML report file path (shorthand)")
+    httpsOnly := flag.Bool("https-only", false, "Extract only HTTPS services")
+    flag.BoolVar(httpsOnly, "s", false, "Extract only HTTPS services (shorthand)")
     flag.Parse()
 
     var reader io.Reader
@@ -104,6 +106,9 @@ func main() {
 
         for _, port := range host.Ports.Port {
             if port.State.State == "open" && (port.Service.Name == "http" || port.Service.Name == "https") {
+                if *httpsOnly && port.Service.Name != "https" {
+                    continue
+                }
                 protocol := port.Service.Name
                 url := fmt.Sprintf("%s://%s:%d", protocol, address, port.PortID)
                 fmt.Println(url)
